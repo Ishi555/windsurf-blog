@@ -1,9 +1,18 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import type { GetStaticPaths, MarkdownInstance } from 'astro';
+
+interface Frontmatter {
+  title: string;
+  date: string;
+  tags?: string[];
+}
+
+type BlogPost = MarkdownInstance<Frontmatter>;
 
 // Log the files being found
 console.log("Searching for blog posts...");
-const posts = await Astro.glob('./**/*.md');
+const posts = await Astro.glob<BlogPost>('./**/*.md');
 console.log("Found posts:", posts.map(p => ({ 
   url: p.url,
   file: p.file,
@@ -24,8 +33,9 @@ console.log("Sorted posts:", sortedPosts.map(p => p.frontmatter.title));
     <h1>Latest Adventures</h1>
     
     <div class="card-grid">
-      {sortedPosts.map(post => {
-        const url = `/windsurf-blog${post.url}`;
+      {sortedPosts.map((post: BlogPost) => {
+        // Get the URL path without the base path
+        const url = post.url?.replace('/windsurf-blog', '') ?? '#';
         return (
           <article class="card">
             <h2>
@@ -124,7 +134,7 @@ console.log("Sorted posts:", sortedPosts.map(p => p.frontmatter.title));
 
   .read-more {
     display: inline-block;
-    color: #3498db;
+    color: #3a9fe2c4;
     text-decoration: none;
     font-weight: bold;
   }
