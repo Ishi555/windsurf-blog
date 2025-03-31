@@ -1,11 +1,60 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="Home">
+  <!-- Hero Section -->
+  <div class="hero">
+    <div>
+      <h1 class="text-4xl md:text-6xl font-['Bangers'] text-blue-800 mb-4 animate-bounce">
+        Welcome to Boy's Adventure!
+      </h1>
+      <p class="text-xl text-blue-600 max-w-2xl">
+        Join us on an exciting journey through games, sports, science experiments, and cool stuff that boys love!
+      </p>
+    </div>
+    <div class="absolute right-0 bottom-0 opacity-10 text-9xl">
+      🚀
+    </div>
+  </div>
+
+  <!-- Featured Categories -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-lg shadow-lg hover:transform hover:scale-105 transition-transform">
+      <div class="text-4xl mb-2">🎮</div>
+      <h2 class="text-xl font-bold text-blue-800 mb-2">Gaming Adventures</h2>
+      <p class="text-gray-600">Discover awesome games and gaming tips!</p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-lg hover:transform hover:scale-105 transition-transform">
+      <div class="text-4xl mb-2">⚽</div>
+      <h2 class="text-xl font-bold text-blue-800 mb-2">Sports & Activities</h2>
+      <p class="text-gray-600">Stay active with fun sports and outdoor activities!</p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-lg hover:transform hover:scale-105 transition-transform">
+      <div class="text-4xl mb-2">🔬</div>
+      <h2 class="text-xl font-bold text-blue-800 mb-2">Cool Science</h2>
+      <p class="text-gray-600">Mind-blowing experiments and discoveries!</p>
+    </div>
+  </div>
+
+  <!-- Latest Posts Preview -->
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-3xl font-['Bangers'] text-blue-800 mb-6">Latest Adventures</h2>
+    <div class="space-y-4">
+      <div class="border-b pb-4">
+        <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">
+          <a href="/blog/first-post">Top 10 Nintendo Switch Games for 2025</a>
+        </h3>
+        <p class="text-gray-600">Check out our favorite Nintendo Switch games that every boy should try!</p>
+      </div>
+      <div class="border-b pb-4">
+        <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">
+          <a href="/blog/second-post">Awesome Backyard Science Experiments</a>
+        </h3>
+        <p class="text-gray-600">Try these safe and fun experiments in your backyard!</p>
+      </div>
+    </div>
+  </div>
+</MainLayout>
