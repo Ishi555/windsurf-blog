@@ -16,7 +16,7 @@ const { frontmatter } = Astro.props;
         })}
       </time>
       {frontmatter.tags && (
-        <div style="margin-top: 0.5rem;">
+        <div class="tags">
           {frontmatter.tags.map((tag: string) => (
             <span class="tag">{tag}</span>
           ))}
@@ -29,3 +29,67 @@ const { frontmatter } = Astro.props;
     </div>
   </article>
 </MainLayout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    margin-bottom: 2rem;
+    color: #666;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .tag {
+    background: #e5e7eb;
+    color: #4b5563;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+
+  .content {
+    line-height: 1.6;
+  }
+
+  .content :global(h2) {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin: 2rem 0 1rem;
+  }
+
+  .content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .content :global(a) {
+    color: #3498db;
+    text-decoration: none;
+  }
+
+  .content :global(a:hover) {
+    text-decoration: underline;
+  }
+</style>

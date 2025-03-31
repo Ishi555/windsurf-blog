@@ -1,0 +1,95 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+const posts = await Astro.glob('./blog/*.md');
+---
+
+<MainLayout title="Blog | Adventure Blog">
+  <div class="blog-index">
+    <h1>Latest Adventures</h1>
+    <div class="posts-grid">
+      {posts.map(post => (
+        <article class="post-card">
+          <a href={post.url}>
+            <h2>{post.frontmatter.title}</h2>
+            <div class="post-meta">
+              <time datetime={post.frontmatter.date}>
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+            <div class="tags">
+              {post.frontmatter.tags.map((tag: string) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .blog-index {
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .post-card a {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+  }
+
+  .post-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: #e5e7eb;
+    color: #4b5563;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+</style>
