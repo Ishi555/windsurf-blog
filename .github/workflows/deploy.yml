@@ -32,7 +32,9 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm clean-install --legacy-peer-deps
+        run: |
+          rm -f package-lock.json
+          npm install --legacy-peer-deps
       
       - name: Build with Astro
         run: npm run build
