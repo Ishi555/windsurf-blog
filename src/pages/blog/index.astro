@@ -12,32 +12,112 @@ const sortedPosts = posts.sort((a, b) =>
     <h1>Latest Adventures</h1>
     
     <div class="card-grid">
-      {sortedPosts.map(post => (
-        <article class="card">
-          <h2>
-            <a href={post.url}>{post.frontmatter.title}</a>
-          </h2>
-          <div class="post-meta">
-            <time datetime={post.frontmatter.date}>
-              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-            {post.frontmatter.tags && (
-              <div style="margin-top: 0.5rem;">
-                {post.frontmatter.tags.map((tag: string) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-            )}
-          </div>
-          <a href={post.url} class="text-blue-600 hover:text-blue-800 font-bold">
-            Read More →
-          </a>
-        </article>
-      ))}
+      {sortedPosts.map(post => {
+        const url = `/windsurf-blog${post.url}`;
+        return (
+          <article class="card">
+            <h2>
+              <a href={url}>{post.frontmatter.title}</a>
+            </h2>
+            <div class="post-meta">
+              <time datetime={post.frontmatter.date}>
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              {post.frontmatter.tags && (
+                <div class="tags">
+                  {post.frontmatter.tags.map((tag: string) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <a href={url} class="read-more">
+              Read More →
+            </a>
+          </article>
+        );
+      })}
     </div>
   </div>
 </MainLayout>
+
+<style>
+  .blog-post {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+  }
+
+  h2 a {
+    color: #2c3e50;
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    color: #3498db;
+  }
+
+  .post-meta {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .tag {
+    background: #e5e7eb;
+    color: #4b5563;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+
+  .read-more {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .read-more:hover {
+    color: #2980b9;
+  }
+</style>
