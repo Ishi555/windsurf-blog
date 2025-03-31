@@ -1,10 +1,22 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 
-const posts = await Astro.glob('./*.md');
+// Log the files being found
+console.log("Searching for blog posts...");
+const posts = await Astro.glob('./**/*.md');
+console.log("Found posts:", posts.map(p => ({ 
+  url: p.url,
+  file: p.file,
+  title: p.frontmatter.title,
+  date: p.frontmatter.date 
+})));
+
 const sortedPosts = posts.sort((a, b) => 
   new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
 );
+
+// Log the sorted posts
+console.log("Sorted posts:", sortedPosts.map(p => p.frontmatter.title));
 ---
 
 <MainLayout title="Blog">
